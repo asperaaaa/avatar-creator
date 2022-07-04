@@ -1,0 +1,22 @@
+{
+  "name": "js-day-2022",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.1.4",
+    "vite": "^2.4.3"
+  },
+  "dependencies": {
+    "@react-three/drei": "^8.8.3",
+    "@react-three/fiber": "^7.0.26",    
+    "lamina": "1.0.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "three": "^0.137.5"
+  }
+}

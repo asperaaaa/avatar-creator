@@ -1,0 +1,56 @@
+.settings-wrapper{
+    width: 100%;
+    height: 200px;
+    position: fixed;
+    backdrop-filter: blur(40px);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+}
+
+.setting-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;        
+}
+
+.setting-block__title-wrapper{
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+}
+
+.setting-block__arrows{
+    cursor: pointer;
+}
+
+.setting-block__colors-wrapper{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.setting-block__color{
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;    
+    border-radius: 50%;
+    margin-right: 10px;   
+    cursor: pointer; 
+}
+
+.setting-block__color--selected{
+    border: 3px solid black;        
+}
+
+.setting-block__color:last-of-type{
+    margin-right: 0;
+}
