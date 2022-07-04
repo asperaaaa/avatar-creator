@@ -1,12 +1,7 @@
-import { Camera, Matrix4 } from "three";
 import { render } from "react-dom";
-import { Suspense, useState, useMemo, useRef } from "react";
+import { Suspense, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import {
-  Environment,
-  PerspectiveCamera,
-  OrbitControls,
-} from "@react-three/drei";
+import { Environment, OrbitControls } from "@react-three/drei";
 
 import style from "./style.css";
 import Helmet from "./components/Helmet";
@@ -15,26 +10,13 @@ import Lights from "./components/Lights";
 import { SettingsConst, SettingsIds } from "./constants";
 
 function Screenshot(props) {
-  const { gl, scene, camera } = useThree();
-  const virtualCam = new Camera();
-  scene.add(virtualCam); 
-  const matrix = new Matrix4();
-  
-  useFrame(() => {
-    // matrix.copy(camera.matrix).invert();
-    virtualCam.clone(camera);
-    // virtualCam.quaternion.setFromRotationMatrix(matrix);
-    console.log('virtualCam',virtualCam)
-    console.log('camera',camera)
-  });
-  props.callback(gl, scene, virtualCam);
-  // props.callback(gl, scene, camera);
- 
+  const { gl, scene, camera, size } = useThree();
+  props.callback(gl, scene, camera, size);
   return null;
 }
 
 function App() {
-  let gl, scene, camera;
+  let gl, scene, camera, size;
   const settings = SettingsConst;
 
   const [selectedSettings, setSelectedSettings] = useState({
@@ -42,14 +24,19 @@ function App() {
     [SettingsIds.detailColor]: "#030303",
     [SettingsIds.backgroundColor]: "#E3E3E3",
     [SettingsIds.lightsColor]: "#E3E3E3",
-    [SettingsIds.cameraPos]: [14, 4, 18],
   });
 
   const handleChangeSettings = (newSelectedSettings) => {
     setSelectedSettings(newSelectedSettings);
   };
 
-  const takeScreenshot = () => {
+  const takeScreenshot = () => {    
+    const oldCameraAspect = camera.aspect;
+
+    gl.setSize(1080,1080);
+    camera.aspect = 1;
+    camera.updateProjectionMatrix();
+
     gl.render(scene, camera);
     const link = document.createElement("a");
     link.setAttribute("download", "avatar.png");
@@ -60,23 +47,29 @@ function App() {
         .replace("image/png", "image/octet-stream")
     );
     link.click();
+
+    gl.setSize(size.width, size.height);   
+    camera.aspect = oldCameraAspect;
+    camera.updateProjectionMatrix();
   };
 
   return (
     <>
       <div
+        className="download"
         onClick={() => {
           takeScreenshot();
         }}
       >
-        {JSON.stringify(selectedSettings)}
+        DOWNLOAD AVATAR
       </div>
-      <Canvas dpr={[1, 2]} camera={{ position: [-3, 3, 3], fov: 35 }}>
+      <Canvas dpr={[1, 2]} camera={{ fov: 35 }}>
         <Screenshot
-          callback={(_gl, _scene, _camera) => {
+          callback={(_gl, _scene, _camera, _size) => {
             gl = _gl;
             scene = _scene;
             camera = _camera;
+            size = _size;
           }}
         />
         {selectedSettings && (

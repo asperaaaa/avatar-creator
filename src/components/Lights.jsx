@@ -10,8 +10,7 @@ export default function Lights({ ...props }) {
   useEffect(() => {
     setColor(props.color);    
   }, [props.color]);
-  
-  console.log('color', color);
+    
   return (
     <>
       {positions.map((pos, i) => (

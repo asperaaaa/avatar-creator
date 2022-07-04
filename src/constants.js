@@ -49,7 +49,7 @@ export const SettingsConst = [
     id: SettingsIds.lightsColor,
     title: "LIGHTS 4/4",
     colors: sceneColorsConst,
-    camera: [0, 10, 20],
+    camera: [0, 2, 20],
   },
 ];
 
