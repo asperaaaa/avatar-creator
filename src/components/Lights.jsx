@@ -17,7 +17,7 @@ export default function Lights({ ...props }) {
         <spotLight
           key={i}
           position={positions[i]}
-          intensity={0.75}
+          intensity={4}
           angle={0.5}
           penumbra={1}
           color={color}

@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { SettingsIds } from "../constants";
+import downloadIcon from "/download.png";
 
 export default function Settings({ ...props }) {
   const settings = props.settings;
   const selectedSettings = props.selectedSettings;
   const handleChangeSettings = props.handleChangeSettings;
+  const takeScreenshot = props.takeScreenshot;
 
   const [settingsIndex, setSettingsIndex] = useState(0);
 
   const updateCameraPos = () => {
     const newSelectedSettings = {
       ...selectedSettings,
-      [SettingsIds.cameraPos]:settings[settingsIndex].camera
+      [SettingsIds.cameraPos]: settings[settingsIndex].camera,
     };
     handleChangeSettings(newSelectedSettings);
   };
@@ -21,8 +23,8 @@ export default function Settings({ ...props }) {
   }, [settingsIndex]);
 
   const changeIndex = (value) => {
-    setSettingsIndex(settingsIndex + value);    
-  }
+    setSettingsIndex(settingsIndex + value);
+  };
 
   return (
     <div className="settings">
@@ -55,24 +57,28 @@ export default function Settings({ ...props }) {
                 →
               </span>
             </div>
-            <div className="setting-block__colors-wrapper">
-              {setting.colors.map((color) => (
-                <div
-                  key={color}
-                  onClick={() => {
-                    const newSelectedSettings = { ...selectedSettings };
-                    newSelectedSettings[setting.id] = color;
-                    handleChangeSettings(newSelectedSettings);
-                  }}
-                  className={`setting-block__color ${
-                    selectedSettings[setting.id] === color
-                      ? "setting-block__color--selected"
-                      : ""
-                  }`}
-                  style={{ backgroundColor: color }}
-                ></div>
-              ))}
-            </div>
+            {index === settings.length - 1 ? (
+              <img onClick={()=>{takeScreenshot()}} className="download-icon" src={downloadIcon} />
+            ) : (
+              <div className="setting-block__colors-wrapper">
+                {setting.colors.map((color) => (
+                  <div
+                    key={color}
+                    onClick={() => {
+                      const newSelectedSettings = { ...selectedSettings };
+                      newSelectedSettings[setting.id] = color;
+                      handleChangeSettings(newSelectedSettings);
+                    }}
+                    className={`setting-block__color ${
+                      selectedSettings[setting.id] === color
+                        ? "setting-block__color--selected"
+                        : ""
+                    }`}
+                    style={{ backgroundColor: color }}
+                  ></div>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}

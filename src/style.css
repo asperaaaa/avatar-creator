@@ -1,12 +1,9 @@
-.download{
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    z-index: 2;
+*{
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.download-icon{
+    height: 50px;
     cursor: pointer;
 }
 
@@ -29,8 +26,7 @@
     align-items: center;        
 }
 
-.setting-block__title-wrapper{
-    font-family: sans-serif;
+.setting-block__title-wrapper{    
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 20px;

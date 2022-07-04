@@ -9,12 +9,12 @@ const materialColorsConst = [
 ];
 
 const sceneColorsConst = [
-  "#030303",
-  "#123B74",
-  "#265828",
-  "#950000",
-  "#B34C00",
-  "#800080",
+  "#222222",
+  "#1E90FF",
+  "#51FF00",  
+  "#ff1100",
+  "#FF6A00",
+  "#8F00FF",
   "#E3E3E3",
 ];
 
@@ -49,6 +49,11 @@ export const SettingsConst = [
     id: SettingsIds.lightsColor,
     title: "LIGHTS 4/4",
     colors: sceneColorsConst,
+    camera: [0, 2, 20],
+  },
+  {
+    id: 'download',
+    title: "DOWNLOAD",    
     camera: [0, 2, 20],
   },
 ];

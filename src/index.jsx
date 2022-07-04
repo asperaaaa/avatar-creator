@@ -54,15 +54,7 @@ function App() {
   };
 
   return (
-    <>
-      <div
-        className="download"
-        onClick={() => {
-          takeScreenshot();
-        }}
-      >
-        DOWNLOAD AVATAR
-      </div>
+    <>      
       <Canvas dpr={[1, 2]} camera={{ fov: 35 }}>
         <Screenshot
           callback={(_gl, _scene, _camera, _size) => {
@@ -89,6 +81,7 @@ function App() {
         settings={settings}
         selectedSettings={selectedSettings}
         handleChangeSettings={handleChangeSettings}
+        takeScreenshot={takeScreenshot}
       />
     </>
   );
