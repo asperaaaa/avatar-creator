@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { SettingsIds } from "../constants";
-import downloadIcon from "/download.png";
+
+import downloadIcon from "/download.svg";
+import leftArrow from "/leftArrow.svg";
+import rightArrow from "/rightArrow.svg";
 
 export default function Settings({ ...props }) {
   const settings = props.settings;
@@ -28,22 +31,22 @@ export default function Settings({ ...props }) {
 
   return (
     <div className="settings">
+      <div className="settings-progess" style={{width:`${(settingsIndex/(settings.length-1))*100}%`}}></div>
       {settings.map((setting, index) => {
         if (index !== settingsIndex) return;
         return (
           <div key={index} className="setting-block">
-            <span
+            <img
+              src={leftArrow}
               className={`setting-block__arrows ${
                 settingsIndex > 0 ? "" : "setting-block__arrows--disabled"
               }`}
               onClick={() => {
                 changeIndex(-1);
               }}
-            >
-              ←
-            </span>
+            />
             <div className="setting-block__center">
-              <div className="setting-block__title">{setting.title}</div>
+              {setting.title}
               {index === settings.length - 1 ? (
                 <img
                   onClick={() => {
@@ -73,8 +76,8 @@ export default function Settings({ ...props }) {
                 </div>
               )}
             </div>
-
-            <span
+            <img
+              src={rightArrow}
               className={`setting-block__arrows ${
                 settingsIndex < settings.length - 1
                   ? ""
@@ -83,9 +86,7 @@ export default function Settings({ ...props }) {
               onClick={() => {
                 changeIndex(1);
               }}
-            >
-              →
-            </span>
+            />
           </div>
         );
       })}
