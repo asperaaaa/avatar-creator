@@ -29,25 +29,25 @@ export const SettingsIds = {
 export const SettingsConst = [
   {
     id: SettingsIds.mainColor,
-    title: "MAIN 1/4",
+    title: "MAIN",
     colors: materialColorsConst,
     camera: [14, 4, 18],
   },
   {
     id: SettingsIds.detailColor,
-    title: "DETAIL 2/4",
+    title: "DETAIL",
     colors: materialColorsConst,
     camera: [-14, 2, 10],
   },
   {
     id: SettingsIds.backgroundColor,
-    title: "BACKGROUND 3/4",
+    title: "BACKGROUND",
     colors: sceneColorsConst,
     camera: [0, 10, 20],
   },
   {
     id: SettingsIds.lightsColor,
-    title: "LIGHTS 4/4",
+    title: "LIGHTS",
     colors: sceneColorsConst,
     camera: [0, 2, 20],
   },

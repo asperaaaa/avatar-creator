@@ -32,53 +32,60 @@ export default function Settings({ ...props }) {
         if (index !== settingsIndex) return;
         return (
           <div key={index} className="setting-block">
-            <div className="setting-block__title-wrapper">
-              <span
-                className={`setting-block__arrows ${
-                  settingsIndex > 0 ? "" : "setting-block__arrows--disabled"
-                }`}
-                onClick={() => {
-                  changeIndex(-1);
-                }}
-              >
-                ←
-              </span>
-              <span className="setting-block__title">{setting.title}</span>
-              <span
-                className={`setting-block__arrows ${
-                  settingsIndex < settings.length - 1
-                    ? ""
-                    : "setting-block__arrows--disabled"
-                }`}
-                onClick={() => {
-                  changeIndex(1);
-                }}
-              >
-                →
-              </span>
+            <span
+              className={`setting-block__arrows ${
+                settingsIndex > 0 ? "" : "setting-block__arrows--disabled"
+              }`}
+              onClick={() => {
+                changeIndex(-1);
+              }}
+            >
+              ←
+            </span>
+            <div className="setting-block__center">
+              <div className="setting-block__title">{setting.title}</div>
+              {index === settings.length - 1 ? (
+                <img
+                  onClick={() => {
+                    takeScreenshot();
+                  }}
+                  className="download-icon"
+                  src={downloadIcon}
+                />
+              ) : (
+                <div className="setting-block__colors-wrapper">
+                  {setting.colors.map((color) => (
+                    <div
+                      key={color}
+                      onClick={() => {
+                        const newSelectedSettings = { ...selectedSettings };
+                        newSelectedSettings[setting.id] = color;
+                        handleChangeSettings(newSelectedSettings);
+                      }}
+                      className={`setting-block__color ${
+                        selectedSettings[setting.id] === color
+                          ? "setting-block__color--selected"
+                          : ""
+                      }`}
+                      style={{ backgroundColor: color }}
+                    ></div>
+                  ))}
+                </div>
+              )}
             </div>
-            {index === settings.length - 1 ? (
-              <img onClick={()=>{takeScreenshot()}} className="download-icon" src={downloadIcon} />
-            ) : (
-              <div className="setting-block__colors-wrapper">
-                {setting.colors.map((color) => (
-                  <div
-                    key={color}
-                    onClick={() => {
-                      const newSelectedSettings = { ...selectedSettings };
-                      newSelectedSettings[setting.id] = color;
-                      handleChangeSettings(newSelectedSettings);
-                    }}
-                    className={`setting-block__color ${
-                      selectedSettings[setting.id] === color
-                        ? "setting-block__color--selected"
-                        : ""
-                    }`}
-                    style={{ backgroundColor: color }}
-                  ></div>
-                ))}
-              </div>
-            )}
+
+            <span
+              className={`setting-block__arrows ${
+                settingsIndex < settings.length - 1
+                  ? ""
+                  : "setting-block__arrows--disabled"
+              }`}
+              onClick={() => {
+                changeIndex(1);
+              }}
+            >
+              →
+            </span>
           </div>
         );
       })}
